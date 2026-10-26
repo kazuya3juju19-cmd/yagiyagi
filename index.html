@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eaf1e3">
+  <title>ヤギの草花図鑑</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>🐐 ヤギの草花図鑑</h1>
+      <p>ヤギと暮らす、小さな牧場生活</p>
+    </div>
+    <button id="settingsBtn" class="icon-button">⚙️</button>
+  </header>
+
+  <main class="app">
+    <section class="world panel">
+      <div class="sun"></div>
+      <div class="mountains"></div>
+      <div class="hills"></div>
+      <div class="fence"></div>
+      <div class="grass"></div>
+
+      <div class="pet-card">
+        <img id="avatar"
+          src="https://images.unsplash.com/photo-1524024973431-2ad916746881?auto=format&fit=crop&w=500&q=85"
+          alt="ヤギ">
+        <div>
+          <strong id="petName">はる</strong>
+          <span id="petAge">子ヤギ · 生後2か月</span>
+          <small id="petLevel">牧場に来たばかり</small>
+        </div>
+      </div>
+
+      <div class="weather" id="weather">
+        ☀️ のんびりした牧場の日
+      </div>
+
+      <div id="goat" class="goat idle">
+        <div class="fallback-goat">🐐</div>
+        <div class="thought" id="thought">
+          こっちに来てくれたよ！
+        </div>
+      </div>
+
+      <div class="world-caption">
+        <span id="moodIcon">💚</span>
+        <span id="mood">はるはあなたを見ているよ。</span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>🐐 はるとふれあう</h2>
+        <span class="pill">バー表示なし</span>
+      </div>
+
+      <p class="muted">
+        数字ではなく、仕草や鳴き声で気持ちを伝えるよ。
+      </p>
+
+      <div class="actions">
+        <button data-action="feed">
+          <span>🌿</span>ごはん
+          <small>牧草をあげる</small>
+        </button>
+        <button data-action="water">
+          <span>💧</span>水をあげる
+          <small>水分補給</small>
+        </button>
+        <button data-action="pet">
+          <span>🤲</span>なでる
+          <small>仲良くなる</small>
+        </button>
+        <button data-action="brush">
+          <span>🪮</span>ブラッシング
+          <small>毛のお手入れ</small>
+        </button>
+        <button data-action="play">
+          <span>⚽</span>遊ぶ
+          <small>一緒に遊ぶ</small>
+        </button>
+        <button data-action="rest">
+          <span>🛏️</span>休ませる
+          <small>静かに休む</small>
+        </button>
+        <button data-action="clean">
+          <span>🧹</span>小屋を掃除
+          <small>清潔にする</small>
+        </button>
+        <button data-action="call">
+          <span>🗣️</span>名前を呼ぶ
+          <small>反応を見る</small>
+        </button>
+        <button data-action="observe">
+          <span>👀</span>様子を見る
+          <small>仕草を観察</small>
+        </button>
+      </div>
+
+      <div id="notice" class="notice" role="status">
+        はるは牧場を歩きながら、あなたを見ているよ。
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>🌼 草花を調べる</h2>
+      <p class="muted">
+        写真を撮るか選んで、草花の名前を選択しよう。
+      </p>
+
+      <label class="upload">
+        📷 写真を撮る・画像を選ぶ
+        <input id="plantPhoto" type="file"
+          accept="image/*" capture="environment">
+      </label>
+
+      <img id="plantPreview" class="plant-preview"
+        alt="選んだ草花の写真">
+
+      <label for="plantSelect">草花の種類</label>
+      <select id="plantSelect">
+        <option value="">草花を選択…</option>
+        <option>タンポポ</option>
+        <option>シロツメクサ</option>
+        <option>オオバコ</option>
+        <option>ナズナ</option>
+        <option>ヨモギ</option>
+        <option>スイセン</option>
+        <option>キョウチクトウ</option>
+        <option>不明な植物</option>
+      </select>
+
+      <button id="identifyBtn" class="primary full">
+        図鑑に登録する
+      </button>
+
+      <p class="warning">
+        ⚠️ 写真だけでは毒性を判断できないよ。
+        名前や安全性がわからない草花は、
+        現実のヤギに絶対に食べさせないでね。
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>📚 草花図鑑</h2>
+        <span id="bookCount" class="pill">0種類</span>
+      </div>
+      <div id="plantBook" class="book">
+        <p class="muted">まだ草花が登録されていないよ。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>🧺 牧場の記録</h2>
+      <div class="records">
+        <div>
+          <span>牧場生活</span>
+          <strong id="days">1日目</strong>
+        </div>
+        <div>
+          <span>ごはん</span>
+          <strong id="feedCount">0回</strong>
+        </div>
+        <div>
+          <span>お世話</span>
+          <strong id="careCount">0回</strong>
+        </div>
+        <div>
+          <span>発見した草花</span>
+          <strong id="foundCount">0種類</strong>
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button id="saveBtn" class="secondary">💾 セーブ</button>
+        <button id="exportBtn" class="secondary">
+          バックアップ保存
+        </button>
+        <button id="importBtn" class="secondary">
+          バックアップ読込
+        </button>
+        <input id="importFile" type="file"
+          accept="application/json" hidden>
+        <button id="renameBtn" class="secondary">
+          名前を変える
+        </button>
+        <button id="resetBtn" class="danger-button">
+          最初から
+        </button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>🌱 このゲームについて</h2>
+      <p class="muted">
+        ヤギの満腹・水分・元気などは内部で管理し、
+        画面にはバーを表示せず、仕草で表現するよ。
+        時間がたつと少しずつ成長するよ。
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    ヤギの草花図鑑 · 毎日少しずつ仲良くなろう
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

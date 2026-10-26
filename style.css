@@ -1,0 +1,765 @@
+
+:root {
+  --green: #52784c;
+  --green-dark: #365b35;
+  --green-light: #e7f0df;
+  --cream: #fffdf5;
+  --brown: #795b42;
+  --text: #344333;
+  --muted: #788273;
+  --shadow: 0 8px 24px rgba(55, 78, 46, 0.10);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  background: #f3f5e9;
+  font-family:
+    system-ui, -apple-system, BlinkMacSystemFont,
+    "Noto Sans JP", sans-serif;
+  line-height: 1.6;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #9abf7b;
+  outline-offset: 3px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 18px max(16px, calc((100% - 960px) / 2));
+  background: rgba(255, 253, 245, 0.96);
+  border-bottom: 1px solid #e1e8d8;
+}
+
+.topbar h1 {
+  margin: 0;
+  color: var(--green-dark);
+  font-size: clamp(20px, 4vw, 28px);
+  letter-spacing: 0.02em;
+}
+
+.topbar p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.icon-button {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #dce5d4;
+  border-radius: 15px;
+  background: white;
+  font-size: 20px;
+}
+
+.app {
+  width: min(100% - 24px, 960px);
+  margin: 20px auto 36px;
+  display: grid;
+  gap: 18px;
+}
+
+.panel {
+  min-width: 0;
+  padding: clamp(16px, 4vw, 24px);
+  border: 1px solid #e4e9db;
+  border-radius: 24px;
+  background: var(--cream);
+  box-shadow: var(--shadow);
+}
+
+.panel h2 {
+  margin: 0 0 10px;
+  color: var(--green-dark);
+  font-size: 20px;
+}
+
+.muted {
+  margin: 5px 0 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.section-head h2 {
+  margin-bottom: 6px;
+}
+
+.pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* 牧場の風景 */
+
+.world {
+  position: relative;
+  min-height: 430px;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 0;
+  background: linear-gradient(
+    to bottom,
+    #c9e8ef 0%,
+    #e7f3e9 57%,
+    #b9d69a 58%,
+    #84b66f 100%
+  );
+}
+
+.sun {
+  position: absolute;
+  top: 30px;
+  right: 34px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #ffe7a0;
+  box-shadow: 0 0 0 12px rgba(255, 231, 160, 0.20);
+}
+
+.mountains {
+  position: absolute;
+  inset: 105px -30px auto;
+  height: 145px;
+  background: #a7c9b0;
+  clip-path: polygon(
+    0 100%, 0 68%, 15% 25%, 28% 65%,
+    43% 10%, 60% 68%, 76% 30%, 100% 76%, 100% 100%
+  );
+  opacity: 0.9;
+}
+
+.hills {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: 55px;
+  height: 190px;
+  border-radius: 50% 50% 0 0;
+  background: linear-gradient(140deg, #a4cc81, #6da45d);
+}
+
+.hills::after {
+  content: "";
+  position: absolute;
+  left: 35%;
+  top: 25px;
+  width: 90%;
+  height: 150px;
+  border-radius: 50% 50% 0 0;
+  background: #8fbd70;
+}
+
+.grass {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 90px;
+  background:
+    radial-gradient(ellipse at 10% 100%, #528c4d 0 18%, transparent 19%),
+    radial-gradient(ellipse at 30% 100%, #659c53 0 20%, transparent 21%),
+    radial-gradient(ellipse at 55% 100%, #548e4c 0 22%, transparent 23%),
+    radial-gradient(ellipse at 80% 100%, #669f53 0 22%, transparent 23%),
+    #79ad63;
+}
+
+.fence {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 65px;
+  height: 65px;
+  opacity: 0.75;
+  background:
+    linear-gradient(#c6a578, #c6a578) 0 15px / 100% 7px no-repeat,
+    linear-gradient(#c6a578, #c6a578) 0 42px / 100% 7px no-repeat,
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 35px,
+      #a8865d 36px 44px,
+      transparent 45px 80px
+    );
+}
+
+.pet-card {
+  position: absolute;
+  z-index: 5;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100% - 100px);
+  padding: 9px 14px 9px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 18px;
+  background: rgba(255, 253, 245, 0.93);
+  box-shadow: 0 4px 16px rgba(49, 80, 44, 0.12);
+}
+
+.pet-card img {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  object-fit: cover;
+  background: #e3eadb;
+}
+
+.pet-card strong,
+.pet-card span,
+.pet-card small {
+  display: block;
+}
+
+.pet-card strong {
+  font-size: 16px;
+}
+
+.pet-card span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.pet-card small {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--green);
+}
+
+.weather {
+  position: absolute;
+  z-index: 4;
+  top: 100px;
+  right: 14px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 253, 245, 0.85);
+  font-size: 12px;
+}
+
+.goat {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 68px;
+  width: 180px;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+  transition: transform 0.35s ease;
+}
+
+.fallback-goat {
+  font-size: 105px;
+  filter: drop-shadow(0 8px 4px rgba(45, 67, 36, 0.16));
+  animation: goat-idle 2.5s ease-in-out infinite;
+}
+
+.thought {
+  position: absolute;
+  left: 105px;
+  bottom: 125px;
+  width: max-content;
+  max-width: 190px;
+  padding: 9px 13px;
+  border: 1px solid #e4e8d9;
+  border-radius: 15px 15px 15px 3px;
+  background: white;
+  box-shadow: 0 5px 15px rgba(45, 67, 36, 0.12);
+  font-size: 12px;
+  animation: thought-in 0.3s ease-out;
+}
+
+.world-caption {
+  position: absolute;
+  z-index: 6;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 999px;
+  background: rgba(255, 253, 245, 0.91);
+  font-size: 13px;
+  text-align: center;
+}
+
+.goat.happy .fallback-goat {
+  animation: goat-hop 0.55s ease-in-out 2;
+}
+
+.goat.walk .fallback-goat {
+  animation: goat-walk 0.35s ease-in-out 5 alternate;
+}
+
+.goat.sleep .fallback-goat {
+  animation: goat-sleep 1.8s ease-in-out infinite;
+}
+
+.goat.sad .fallback-goat {
+  animation: goat-sad 0.7s ease-in-out 2;
+}
+
+.goat.play .fallback-goat {
+  animation: goat-hop 0.35s ease-in-out 4;
+}
+
+/* お世話ボタン */
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.actions button {
+  min-width: 0;
+  min-height: 105px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 12px 5px;
+  border: 1px solid #dfe8d6;
+  border-radius: 18px;
+  background: #f8faef;
+  color: var(--text);
+  font-weight: 700;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.actions button > span {
+  font-size: 27px;
+  line-height: 1.3;
+}
+
+.actions button small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.actions button:hover {
+  border-color: #aac49b;
+  background: #edf5e5;
+}
+
+.actions button:active {
+  transform: scale(0.96);
+}
+
+.notice {
+  margin-top: 15px;
+  padding: 13px 15px;
+  border-left: 4px solid #86ad70;
+  border-radius: 10px;
+  background: #edf4e6;
+  font-size: 14px;
+}
+
+/* 草花の写真・図鑑 */
+
+.upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 55px;
+  margin: 10px 0 14px;
+  padding: 12px;
+  border: 2px dashed #a9c39a;
+  border-radius: 15px;
+  background: #f6f9ee;
+  color: var(--green-dark);
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.plant-preview {
+  display: none;
+  width: 100%;
+  max-height: 300px;
+  margin: 0 0 14px;
+  border-radius: 16px;
+  object-fit: contain;
+  background: #edf0e7;
+}
+
+.plant-preview.visible {
+  display: block;
+}
+
+.panel label[for="plantSelect"] {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+select {
+  width: 100%;
+  min-height: 48px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid #d9e3d1;
+  border-radius: 12px;
+  background: white;
+  color: var(--text);
+}
+
+.primary,
+.secondary,
+.danger-button {
+  min-height: 45px;
+  padding: 10px 15px;
+  border: 0;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.primary {
+  background: var(--green);
+  color: white;
+}
+
+.primary:hover {
+  background: var(--green-dark);
+}
+
+.full {
+  width: 100%;
+}
+
+.warning {
+  margin: 14px 0 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: #fff1d8;
+  color: #805d20;
+  font-size: 12px;
+}
+
+.book {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.plant-card {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #e0e8d7;
+  border-radius: 15px;
+  background: #fafbf5;
+}
+
+.plant-card img {
+  width: 100%;
+  height: 120px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: #e9eddf;
+}
+
+.plant-card h3 {
+  margin: 8px 0 4px;
+  font-size: 15px;
+}
+
+.plant-card p {
+  margin: 3px 0;
+  color: var(--muted);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.plant-card .plant-warning {
+  color: #a24730;
+  font-weight: 700;
+}
+
+.plant-card .plant-safe {
+  color: var(--green-dark);
+  font-weight: 700;
+}
+
+/* 記録とセーブ */
+
+.records {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.records > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 13px;
+  border-radius: 14px;
+  background: #f1f5e9;
+}
+
+.records span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.records strong {
+  color: var(--green-dark);
+  font-size: 18px;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.secondary {
+  border: 1px solid #dce6d4;
+  background: #f5f8ef;
+  color: var(--green-dark);
+}
+
+.secondary:hover {
+  background: #e8f0df;
+}
+
+.danger-button {
+  background: #fae9e4;
+  color: #984a3a;
+}
+
+.danger-button:hover {
+  background: #f5d8d0;
+}
+
+footer {
+  padding: 10px 16px 28px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+/* アニメーション */
+
+@keyframes goat-idle {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-2deg);
+  }
+}
+
+@keyframes goat-hop {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-18px) rotate(7deg);
+  }
+}
+
+@keyframes goat-walk {
+  from {
+    transform: translateX(-5px) rotate(-3deg);
+  }
+  to {
+    transform: translateX(5px) rotate(3deg);
+  }
+}
+
+@keyframes goat-sleep {
+  0%, 100% {
+    transform: scale(1) rotate(0);
+  }
+  50% {
+    transform: scale(0.96) rotate(-5deg);
+  }
+}
+
+@keyframes goat-sad {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+@keyframes thought-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* スマホ対応 */
+
+@media (max-width: 560px) {
+  .topbar {
+    padding: 14px 16px;
+  }
+
+  .app {
+    width: calc(100% - 18px);
+    margin-top: 10px;
+    gap: 12px;
+  }
+
+  .panel {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .world {
+    min-height: 400px;
+  }
+
+  .pet-card {
+    top: 12px;
+    left: 12px;
+    gap: 8px;
+    padding: 7px 10px 7px 7px;
+  }
+
+  .pet-card img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .weather {
+    top: 82px;
+    right: 10px;
+    font-size: 10px;
+  }
+
+  .goat {
+    bottom: 67px;
+  }
+
+  .thought {
+    left: 100px;
+    bottom: 120px;
+    max-width: 150px;
+    font-size: 11px;
+  }
+
+  .actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .actions button {
+    min-height: 95px;
+    padding: 9px 3px;
+    border-radius: 14px;
+    font-size: 13px;
+  }
+
+  .actions button > span {
+    font-size: 24px;
+  }
+
+  .actions button small {
+    font-size: 10px;
+  }
+
+  .book {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .plant-card {
+    padding: 8px;
+  }
+
+  .plant-card img {
+    height: 95px;
+  }
+
+  .button-row > button {
+    flex: 1 1 42%;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
